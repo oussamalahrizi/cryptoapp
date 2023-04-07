@@ -19,7 +19,7 @@ const Terms = () => {
 		ToastAndroid.show("Copied to Clipboard!", ToastAndroid.SHORT)
 	}
   return (
-	<SafeAreaView style={{flex: 1, backgroundColor : "#091D42"}}>
+	<SafeAreaView style={{flex: 1}}>
 		<View style={styles.acceptContainer}>
 			<Text style={{color : 'white'}}>By clicking 'I Agree', you agree to Jaxx</Text>
 			<Text style={{color : 'white'}}>Libery's Terms of Service</Text>

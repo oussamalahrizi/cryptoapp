@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Language from '../OnboardScreens/language'
+import Language from '../OnboardScreens/Language'
 import Terms from '../OnboardScreens/Terms'
 
 const Onboarding = () => {
