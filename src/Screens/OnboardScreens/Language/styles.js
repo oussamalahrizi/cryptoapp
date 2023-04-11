@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
 	container : {
 		flex : 1,
 		marginTop  : 50,
-		alignItems : 'center'
+		justifyContent : 'space-between',
+		marginBottom : 60,
 	},
 	logo : {
 		width: 100,
@@ -15,6 +16,22 @@ const styles = StyleSheet.create({
 	choose : {
 		fontSize : 17,
 		color : "white"
+	},
+	langContainer : {
+		marginTop : 50,
+		backgroundColor : 'white',
+		marginHorizontal : 30,
+	},
+	continuebtn :{
+		alignItems : 'center'
+	},
+	continuetxt :{
+		color : 'white',
+		backgroundColor : "#EF712D",
+		paddingHorizontal : 120,
+		paddingVertical : 12,
+		fontSize : 16,
+		borderRadius : 8,
 	}
 })
 

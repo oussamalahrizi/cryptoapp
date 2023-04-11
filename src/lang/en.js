@@ -32,8 +32,32 @@ const terms = {
 	ContactInformation2: " For any inquiries or notices to Decentral Inc. regarding this agreement please contact legal@decentral.ca."
 }
 
+const getStarted = {
+	first : {
+		title : "Our #1 priority is to ensure you keep your crypto safe.",
+		description : "Knowledge is your best defense against scams that are on the rise globally. Please read thefollowing tips carefully to help ensure you avoidscams and remain in control of your crypto."
+	},
+	second : {
+		title : "Securely record your 12-word backup phrase and never share it with ANYONE, including us.",
+		description : "Your 12-word backup phrase is the master key to your crypto. We will never ask you for it, and if anyone does, it's a SCAM. Please be careful because scammers often have convincing-sounding reasons for why you need to send them your 12-word backup phrase."
+	},
+	third : {
+		title : "Beware of imposter apps & fake support sites.",
+		description : "Only download Jaxx Liberty from jaxx.io/downloads. To protect you from scams, support is ONLY offered in-app by clicking \"HELP.\" We do not provide support over social media or through our website."
+	},
+	fourth : {
+		title : "We will never ask you to send funds anywhere.",
+		description : "If you've been asked to do so, this is a fraudulent request and should be ignored. Any unsolicited correspondence claiming to be from Jaxx Liberty or its parent company, Decentral, is a scam. Please be cautious."
+	},
+	fifth : {
+		title : "We neither hold nor have access to your crypto.",
+		description : "Your funds are always on the corresponding blockchain, and only you have access to the 12-word backup phrase and private keys required to access them. Jaxx Liberty is simply an interface that enables you to manage your crypto."
+	},
+}
+
 const english = {
 	terms,
+	getStarted
 }
 
 

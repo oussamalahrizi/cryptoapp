@@ -2,22 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import Routes from './src/Routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import store from './src/redux/store';
+import { getOnboard } from './src/redux/Onboard';
 
 export default function App() {
-  const [onboard, setOnboard] = useState()
-
-  const getStorage = async () => {
-    const onboarded = await AsyncStorage.getItem('ONBOARDED');
-    setOnboard(JSON.parse(onboarded));
-  };
-
-  useEffect(()=> {
-    getStorage();
-  }, [])
   return (
-    <>
-      <Routes onboard={onboard} />
+    <Provider store={store}>
+      <Routes />
       <StatusBar translucent={false} />
-      </>
+      </Provider>
   );
 }

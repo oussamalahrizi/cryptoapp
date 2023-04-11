@@ -1,21 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
+import { useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BackupNow from "../../Components/BackupNow";
+import { SafeAreaView } from "react-native";
 
 const MainStack = () => {
   return (
-	<View style= {styles.container}>
-	  <Text>MainStack</Text>
-	</View>
-  )
-}
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <BackupNow />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default MainStack
+export default MainStack;
 
-const styles = StyleSheet.create({
-	container :
-	{
-		flex : 1,
-		alignItems : 'center',
-		justifyContent : 'center'
-	}
-})
+const styles = StyleSheet.create({});
