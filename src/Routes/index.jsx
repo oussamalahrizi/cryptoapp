@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  useNavigation,
+  StackActions,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainStack from "../Screens/MainStack";
 import Onboarding from "../Screens/Onboarding";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import logo from "../../assets/logo.png";
-import help from "../../assets/others/help.png";
+
 import { SimpleLineIcons } from "@expo/vector-icons";
+import BackUpScreen from "../Screens/BackUpScreen";
+import FinalScreen from "../Screens/OnboardScreens/FinalScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { setScreen } from "../redux/Screen";
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -28,53 +35,17 @@ const Routes = () => {
       setOnboard(true);
     }
   };
+
   useEffect(() => {
     getData();
   }, []);
   return (
     onboard != null && (
       <NavigationContainer theme={theme}>
-        <Stack.Navigator>
-          {onboard && (
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Onboarding"
-              component={Onboarding}
-            />
-          )}
-          <Stack.Screen
-            options={{
-              headerLeft: () => (
-                <View>
-                  <Image
-                    source={logo}
-                    style={{ width: 50, height: 50, resizeMode: "contain" }}
-                  />
-                </View>
-              ),
-              headerRight: () => (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <TouchableOpacity>
-                    <Image
-                      source={help}
-                      style={{ width: 50, height: 50, resizeMode: "contain" }}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <SimpleLineIcons name="menu" size={24} color="black" />
-                  </TouchableOpacity>
-                </View>
-              ),
-              headerTitle: () => <></>,
-            }}
-            name="MainStack"
-            component={MainStack}
-          />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {onboard && <Stack.Screen name="Onboarding" component={Onboarding} />}
+          <Stack.Screen name="FinalScreen" component={FinalScreen} />
+          <Stack.Screen name="BackUpScreen" component={BackUpScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "expo-app",
+    "name": "crypto-app",
     "slug": "expo-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,10 +20,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.oussama_lahrizi.crypto_app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7e13ad1e-16f3-44c4-a0c5-dfd78c45c963"
+      }
     }
   }
 }

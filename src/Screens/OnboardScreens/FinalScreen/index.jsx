@@ -1,13 +1,18 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./styles";
 import icon from "../../../../assets/icon.png";
-import { useNavigation } from "@react-navigation/native";
-const FinalScreen = () => {
+import { StackActions, useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { setScreen } from "../../../redux/Screen";
+const FinalScreen = ({ finale }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const handleGetStarted = () => {
-    navigation.navigate("Congratulations");
+    dispatch(setScreen("first"));
+    navigation.navigate("BackUpScreen");
   };
+
   return (
     <View style={styles.container}>
       <View />
@@ -17,9 +22,9 @@ const FinalScreen = () => {
       </View>
       <View style={styles.lowerView}>
         <TouchableOpacity onPress={handleGetStarted}>
-          <Text style={styles.textbtn}>Get Started</Text>
+          <Text style={styles.textbtn}>Back Up Now</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleGetStarted}>
           <Text
             style={{
               color: "white",

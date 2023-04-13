@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import Onboard from "./Onboard";
+import Screen from "./Screen";
 export default configureStore({
   reducer: {
-    onboard : Onboard,
+    screen : Screen,
   },
 });

@@ -9,13 +9,16 @@ import image4 from "../../../../assets/svgs/image4.png";
 import image5 from "../../../../assets/svgs/image5.png";
 import english from "../../../lang/en";
 import FlatListItem from "../../../Components/FlatListItem";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { FontAwesome } from "@expo/vector-icons";
 
 const GetStarted = () => {
-  const [disabled, setDisabled] = useState(true);
   const navigation = useNavigation();
-  const handleContinue = () => {
-    navigation.navigate("FinalScreen");
+  const handleContinue = async () => {
+    await AsyncStorage.setItem("@onboard", "false");
+    navigation.dispatch(StackActions.replace("FinalScreen"));
   };
   const data = [
     {
@@ -50,14 +53,11 @@ const GetStarted = () => {
     },
   ];
 
-  const handleIndexChanged = (index) => {
-    index === 4 ? setDisabled(false) : setDisabled(true);
-  };
+  const [checkbox, setCheckbox] = useState(false);
   return (
     <View style={styles.bigContainer}>
       <View style={styles.swiper}>
         <Swiper
-          onIndexChanged={handleIndexChanged}
           paginationStyle={{ marginTop: 10, bottom: 100 }}
           loop={false}
           dot={<View style={styles.dot} />}
@@ -72,15 +72,37 @@ const GetStarted = () => {
           })}
         </Swiper>
       </View>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 120,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <BouncyCheckbox
+          value={checkbox}
+          onPress={setCheckbox}
+          fillColor="#4766AC"
+        />
+        <Text
+          style={{
+            color: "white",
+            fontSize: 16,
+          }}
+        >
+          I Understand
+        </Text>
+      </View>
       <TouchableOpacity
         onPress={handleContinue}
         style={[
           styles.btn,
-          disabled
+          checkbox === false
             ? { backgroundColor: "gray" }
             : { backgroundColor: "#EF712D" },
         ]}
-        disabled={disabled}
+        disabled={checkbox ? false : true}
       >
         <Text style={styles.btnText}>Continue</Text>
       </TouchableOpacity>

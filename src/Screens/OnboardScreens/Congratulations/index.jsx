@@ -14,7 +14,7 @@ const Congratulations = () => {
     //updating onboard state
     setTimeout(async () => {
       await AsyncStorage.setItem("@onboard", "false");
-      navigation.dispatch(StackActions.replace("MainStack"));
+      navigation.dispatch(StackActions.replace("BackUpScreen"));
     }, 2000);
   }, []);
   return (

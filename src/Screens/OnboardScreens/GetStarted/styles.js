@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
 	btn :{
 		position :'absolute',
 		bottom :50,
-		
 		paddingHorizontal : 130,
 		paddingVertical : 12,
 		borderRadius : 5

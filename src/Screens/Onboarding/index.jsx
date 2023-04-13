@@ -20,8 +20,7 @@ const Onboarding = () => {
       <Stack.Screen name="Terms" component={Terms} />
       <Stack.Screen name="Language" component={Language} />
       <Stack.Screen name="GetStarted" component={GetStarted} />
-      <Stack.Screen name="FinalScreen" component={FinalScreen} />
-      <Stack.Screen name="Congratulations" component={Congratulations} />
+      
     </Stack.Navigator>
   );
 };
