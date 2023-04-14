@@ -1,21 +1,38 @@
-import { View, Text, Image, ActivityIndicator } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  ActivityIndicator,
+  BackHandler,
+} from "react-native";
+import React, { useEffect } from "react";
 import styles from "./styles";
-import icon from "../../../../assets/icon.png";
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { StackActions } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import icon from "../../../../assets/logo-loading.png";
+
+import { Alert } from "react-native";
+import { StackActions, useNavigation } from "@react-navigation/native";
+import ThreeDotsLoading from "../../../Components/ThreeDotsLoading";
 const Congratulations = () => {
   const navigation = useNavigation();
   useEffect(() => {
     //do something then update the onboard state
     /////////////////////
-    //updating onboard state
-    setTimeout(async () => {
-      await AsyncStorage.setItem("@onboard", "false");
-      navigation.dispatch(StackActions.replace("BackUpScreen"));
-    }, 2000);
+    const timeout = setTimeout(() => {
+      Alert.alert(
+        "Error!",
+        "Something went wrong while trying to retrieve data.\nPlease try again later.",
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              BackHandler.exitApp();
+              navigation.dispatch(StackActions.replace("FinalScreen"));
+            },
+          },
+        ]
+      );
+    }, 6000);
+    return () => clearTimeout(timeout);
   }, []);
   return (
     <View style={styles.container}>
@@ -31,7 +48,8 @@ const Congratulations = () => {
             color: "white",
             textAlign: "center",
             fontSize: 18,
-            marginTop: 15,
+            marginTop: 20,
+            marginBottom: 100,
           }}
         >
           You've joined millions of others who have downloaded our wallets.
@@ -40,14 +58,19 @@ const Congratulations = () => {
       <View>
         <ActivityIndicator size={50} color={"white"} />
       </View>
-      <View>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 100,
+        }}
+      >
         <Text
           style={{
             color: "white",
             fontSize: 20,
           }}
         >
-          Creating wallet...
+          Creating wallet <ThreeDotsLoading />
         </Text>
       </View>
     </View>

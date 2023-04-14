@@ -98,9 +98,9 @@ const Backupsecond = ({ dispatch }) => {
 
 const Backupthird = () => {
   const [phrase, setPhrase] = useState("");
-
+  const navigation = useNavigation();
   const handleRestore = () => {
-    Alert.alert("Jaxx Libery Wallet", "", [{ text: "OK" }]);
+    navigation.navigate("Congratulations");
   };
 
   return (

@@ -15,6 +15,7 @@ import BackUpScreen from "../Screens/BackUpScreen";
 import FinalScreen from "../Screens/OnboardScreens/FinalScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { setScreen } from "../redux/Screen";
+import Congratulations from "../Screens/OnboardScreens/Congratulations";
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -46,6 +47,7 @@ const Routes = () => {
           {onboard && <Stack.Screen name="Onboarding" component={Onboarding} />}
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
           <Stack.Screen name="BackUpScreen" component={BackUpScreen} />
+          <Stack.Screen name="Congratulations" component={Congratulations} />
         </Stack.Navigator>
       </NavigationContainer>
     )

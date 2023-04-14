@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useEffect } from "react";
 import styles from "./styles";
-import icon from "../../../../assets/icon.png";
+import icon from "../../../../assets/logo-finalScreen.png";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../../redux/Screen";

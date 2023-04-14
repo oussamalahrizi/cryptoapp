@@ -7,16 +7,17 @@ const styles = StyleSheet.create({
 		alignItems : 'center',
 	},
 	upperView : {
-		marginTop : 60,
+		marginTop : 30,
 		alignItems : 'center'
 	},
 	lowerView : {
-		flex : 0.3,
+		flex : 0.33,
 		alignItems : 'center'
 	},
 	img :{
-		width : 100,
-		height : 100
+		width : 170,
+		height : 170,
+		resizeMode : 'contain'
 	},
 	title :{
 		color : 'white',
