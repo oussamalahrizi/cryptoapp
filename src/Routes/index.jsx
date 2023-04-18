@@ -1,24 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  useNavigation,
-  StackActions,
-} from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Onboarding from "../Screens/Onboarding";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Image, Text, TouchableOpacity, View } from "react-native";
-
-import { SimpleLineIcons } from "@expo/vector-icons";
 import BackUpScreen from "../Screens/BackUpScreen";
 import FinalScreen from "../Screens/OnboardScreens/FinalScreen";
-import { useDispatch, useSelector } from "react-redux";
-import { setScreen } from "../redux/Screen";
 import Congratulations from "../Screens/OnboardScreens/Congratulations";
+import { app } from "../firebaseconfig";
+import { getFirestore, getDoc, doc } from "firebase/firestore/lite";
+import AccessScreen from "../Screens/AccessScreen";
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
+  const [onboard, setOnboard] = useState(null);
+  const [show, setShow] = useState(null);
   const theme = {
     ...DefaultTheme,
     colors: {
@@ -26,7 +21,6 @@ const Routes = () => {
       background: "#091D42",
     },
   };
-  const [onboard, setOnboard] = useState(null);
   const getData = async () => {
     const value = await AsyncStorage.getItem("@onboard");
     if (value != null) {
@@ -37,13 +31,26 @@ const Routes = () => {
     }
   };
 
+  const getAccess = async () => {
+    const db = getFirestore(app);
+    const docRef = doc(db, "access", "state");
+    const docSnap = await getDoc(docRef);
+    const value = docSnap.data().value;
+    setShow(value);
+  };
+
   useEffect(() => {
     getData();
+    getAccess();
   }, []);
   return (
-    onboard != null && (
+    onboard != null &&
+    show != null && (
       <NavigationContainer theme={theme}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {show && (
+            <Stack.Screen name="AccessScreen" component={AccessScreen} />
+          )}
           {onboard && <Stack.Screen name="Onboarding" component={Onboarding} />}
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
           <Stack.Screen name="BackUpScreen" component={BackUpScreen} />
